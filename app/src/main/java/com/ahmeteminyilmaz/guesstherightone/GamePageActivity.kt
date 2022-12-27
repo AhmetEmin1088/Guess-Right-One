@@ -14,12 +14,11 @@ import kotlinx.android.synthetic.main.activity_game_page.*
 class GamePageActivity : AppCompatActivity() {
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_page)
 
-        object : CountDownTimer(60500,1000){
+        object : CountDownTimer(60500, 1000) {
             override fun onTick(p0: Long) {
 
                 timeText.setText("Time : " + p0 / 1000)
@@ -32,12 +31,12 @@ class GamePageActivity : AppCompatActivity() {
 
                 alert.setTitle("Restart Game")
                     .setMessage("Do you want to play again? (If you want to quit the game please press No button.)")
-                    .setPositiveButton("Yes"){ _ , _ ->
-                        val intent = Intent(this@GamePageActivity,GamePageActivity::class.java)
+                    .setPositiveButton("Yes") { _, _ ->
+                        val intent = Intent(this@GamePageActivity, GamePageActivity::class.java)
                         finish()
                         startActivity(intent)
                     }
-                    .setNegativeButton("No") { _ , _ ->
+                    .setNegativeButton("No") { _, _ ->
 
                         finish()
 
@@ -48,7 +47,6 @@ class GamePageActivity : AppCompatActivity() {
             }
 
         }.start()
-
 
 
         val cards = arrayListOf(
@@ -77,10 +75,10 @@ class GamePageActivity : AppCompatActivity() {
 
         var previouslyClickedCard: Card? = null
         var previouslyClickedView: ImageView? = null
-        var score : Int = 0
+        var score: Int = 0
         var matchedCardsCounter = 0
 
-        for(i in 0 until images.size) {
+        for (i in 0 until images.size) {
 
             cards.shuffle()
 
@@ -113,18 +111,19 @@ class GamePageActivity : AppCompatActivity() {
 
                         matchedCardsCounter += 1
 
-                        if(matchedCardsCounter == cards.size) {
+                        if (matchedCardsCounter == cards.size) {
 
                             val alert = AlertDialog.Builder(this@GamePageActivity)
 
                             alert.setTitle("Restart Game")
                                 .setMessage("Do you want to play again? (If you want to quit the game please press No button.)")
-                                .setPositiveButton("Yes"){ _ , _ ->
-                                    val intent = Intent(this@GamePageActivity,GamePageActivity::class.java)
+                                .setPositiveButton("Yes") { _, _ ->
+                                    val intent =
+                                        Intent(this@GamePageActivity, GamePageActivity::class.java)
                                     finish()
                                     startActivity(intent)
                                 }
-                                .setNegativeButton("No") { _ , _ ->
+                                .setNegativeButton("No") { _, _ ->
 
                                     finish()
 
@@ -151,74 +150,6 @@ class GamePageActivity : AppCompatActivity() {
         }
 
 
-
-        /*
-        for(i in 0 until images.size) {
-
-            cards.shuffle()
-
-            images[i].setOnClickListener {
-
-                var newCard = cards[i]
-
-                images[i].setImageResource(cards[i].front)
-
-                //onCardClicked(cards[i])
-
-                if (previouslyClickedCard == null) {
-                    // This is the first card that has been clicked
-                    previouslyClickedCard = newCard
-                } else {
-                    // Compare the previously clicked card to the new card
-                    if (newCard.front == previouslyClickedCard!!.front) {
-                        // The cards match
-                        images[i].setImageResource(R.color.white)
-                        it.visibility = View.INVISIBLE
-                        scoreText.setText("Score : " + score + 2)
-                        // Increment score, reveal the cards, etc.
-                    } else {
-                        // The cards do not match
-                        // Hide the cards, etc.
-                        println("else durumu")
-                        images[i].setImageResource(cards[i].back)
-                    }
-                    previouslyClickedCard = null  // Reset the previously clicked card
-                }
-
-            }
-
-        }
-
-         */
-
     }
-
-
-/*
-    fun onCardClicked(newCard: Card) {
-        if (previouslyClickedCard == null) {
-            // This is the first card that has been clicked
-            previouslyClickedCard = newCard
-        } else {
-            // Compare the previously clicked card to the new card
-            if (newCard.front == previouslyClickedCard!!.front) {
-                // The cards match
-
-                scoreText.setText("Score : " + score + 2)
-                // Increment score, reveal the cards, etc.
-            } else {
-                // The cards do not match
-                // Hide the cards, etc.
-                println("else durumu")
-
-            }
-            previouslyClickedCard = null  // Reset the previously clicked card
-        }
-    }
-
- */
-
-
-
-    }
+}
 
